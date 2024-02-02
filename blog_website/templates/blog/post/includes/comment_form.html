@@ -1,0 +1,13 @@
+<h2 class="section-heading">Add a new comment</h2>
+<form action="{% url "blog:post_comment" post.id %}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+
+    {{ field.errors }}
+    <div>
+         <label class="form-lable mt-3">{{ field.label_tag }}</label>
+    </div>
+    {{ field }}
+    {% endfor %}
+ <p><input class="btn btn-primary text-uppercase" type="submit" value="Add comment"></p>
+</form>

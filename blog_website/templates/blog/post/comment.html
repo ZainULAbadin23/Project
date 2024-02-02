@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Add a comment{% endblock %}
+
+{% block content %}
+{% if comment %}
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+<h2 class="mb-4 class="section-heading"">Your comment has been added</h2>
+<div class="d-flex mb-4"><a class="btn btn-primary text-uppercase" href="{{ post.get_absolute_url }}">Back to the Post</a></div>
+{% else %}
+{% include "blog/post/includes/comment_form.html" %}
+{% endif %}
+</div>
+</article>
+{% endblock %}
+

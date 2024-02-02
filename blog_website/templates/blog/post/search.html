@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+ <div class="container px-2">
+    <div class="row gx-4 gx-lg-5 ">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            {% if query %}
+ <h2>Posts containing "{{ query }}"</h2>
+ {% with results.count as total_results %}
+ Found {{ total_results }} result{{ total_results|pluralize }}
+ {% endwith %}
+            {% for post in results %}
+            <div class="post-preview">
+                <a href="{{ post.get_absolute_url }}">
+                    <h2 class="post-title">{{post.title}}</h2>
+                    <h3 class="post-subtitle">{{post.body|truncatewords:10|linebreaks}}</h3>
+                    <h6>Tags:<span> {% for tag in post.tags.all %}
+                        <a class="text-primary" href="{% url "blog:post_list_by_tag" tag.slug %}">
+                        {{ tag.name }}
+                        </a>
+                        {% if not forloop.last %}, {% endif %}
+                        {% endfor %}</span></h6>
+                    <p class="post-meta">
+                        Posted by
+                        <a class="text-primary " href="#!">{{post.author}}</a>
+                        on {{post.publish}}
+                    </p>
+                    <hr class="my-4" />
+                    {% empty %}
+                    <p>There are no results for your query.</p>
+                </a>
+            {% endfor %}
+            <p><a class="text-primary" style="text-decoration:none;" href="{% url "blog:post_search" %}">Search again</a></p>
+            {% else %}
+ <h1>Search for posts</h1>
+ <form method="get">
+ {{ form.as_p }}
+ <input class="btn btn-primary mb-4" type="submit" value="Search">
+ </form>
+ {% endif %}
+</div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,10 @@
+<div class="pagination justify-content-end">
+    <span class="step-links">
+    {% if page.has_previous %}
+    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="?page={{ page.previous_page_number }}">Newer Posts →</a></div>
+    {% endif %}
+    {% if page.has_next %}
+    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="?page={{ page.next_page_number }}">Older Posts →</a></div>
+    {% endif %}
+    </span>
+   </div>
